@@ -1,0 +1,27 @@
+.input_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.input_label {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-normal-color);
+  margin-bottom: 20px;
+}
+
+.input_container > input {
+  width: 100%;
+  height: 50px;
+  border-radius: var(--border-radius);
+  border: solid 1px #000000;
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-medium);
+}
+
+.input_container > input:focus {
+  border: solid 3px var(--primary-color);
+}
