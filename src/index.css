@@ -1,8 +1,28 @@
+:root {
+  --text-font-family: 'Ubuntu', sans-serif;
+  --title-font-family: 'Russo One', sans-serif;
+  --font-size-small: 12px;
+  --font-size-normal: 18px;
+  --font-size-big: 24px;
+  --font-size-huge: 36px;
+  --font-weight-light: 300;
+  --font-weight-medium: 500;
+  --font-weight-important: 700;
+  --primary-color: #039BE5;
+  --primary-color-dark: #028bce;
+  --primary-color-light: #40befb;
+  --secondary-color: #03E5BE;
+  --secondary-color-dark: #13bfa1;
+  --secondary-color-light: #10ffd6;
+  --text-primary-color: #ffffff;
+  --text-secondary-color: #ffffff;
+  --text-normal-color: #000000;
+  --border-radius: 4px;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--text-font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
