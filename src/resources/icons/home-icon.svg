@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="465px" height="467px" viewBox="0 0 465 467" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>home-icon</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="home-icon">
+            <path d="M0,189 L232.5,0 L465,189 L395,189 C397.209139,189 399,190.790861 399,193 L399,463 C399,465.209139 397.209139,467 395,467 L70,467 C67.790861,467 66,465.209139 66,463 L66,193 C66,190.790861 67.790861,189 70,189 L0,189 Z" id="Combined-Shape" fill="#FFFFFF"></path>
+            <rect id="Rectangle" fill="#000000" x="176" y="346" width="112" height="121" rx="4"></rect>
+        </g>
+    </g>
+</svg>
