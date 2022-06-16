@@ -1,13 +1,12 @@
 import './App.css';
-import { Link } from 'react-router-dom';
-import TestComponents from './test-components/test-components';
+import { Outlet } from 'react-router-dom';
+import StarwarsNavbar from './components/starwars-navbar/starwars-navbar'
 
 function App() {
   return (
     <div className="container">
-       <h1>This is the home app</h1>
-       <Link to="/test">To test</Link>
-       <TestComponents />
+        <StarwarsNavbar title="Startwars"/>
+        <Outlet />
     </div>
   );
 }
