@@ -1,0 +1,35 @@
+.star-button_button {
+  width: 33px;
+  height: 31px;
+  background-image: url('../../resources/icons/Star.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.star-button_button:hover {
+  transform: scale(1.1);
+}
+
+.star-button_button:focus {
+  outline: none;
+  border: 1px solid var(--primary-color);
+  border-radius: var(--border-radius);
+}
+
+@keyframes active-star {
+  0% {
+    background-image: url('../../resources/icons/Star.svg');
+  }
+  100% {
+    background-image: url('../../resources/icons/Star-active.svg');
+  }
+}
+
+.star-button_button.active {
+  background-image: url('../../resources/icons/Star-active.svg');
+  animation: active-star 1s ease;
+}
