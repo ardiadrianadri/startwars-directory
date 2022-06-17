@@ -1,0 +1,45 @@
+.starwars-card_container {
+  width: 200px;
+  height: 229px;
+  border-radius: var(--border-radius);
+  border: solid 3px #000000;
+  margin: 10px;
+}
+
+.starwars-card_header {
+  width: 100%;
+  height: 41px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: solid 3px #000000;
+}
+
+.starwars-card_header_title {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+  color: var(--text-normal-color);
+}
+
+.starwars-card_body {
+  width: 100%;
+  height: 126px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: solid 3px #000000;
+}
+
+.starwars-card_body-img {
+  max-width: 160px;
+  max-height: 120px;
+}
+
+.starwars-card_footer {
+  width: 100%;
+  height: 62px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
