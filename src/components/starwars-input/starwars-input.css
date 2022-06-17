@@ -7,6 +7,7 @@
 }
 
 .input_label {
+  white-space: nowrap;
   font-size: var(--font-size-normal);
   font-weight: var(--font-weight-medium);
   color: var(--text-normal-color);

@@ -1,0 +1,14 @@
+.search-from_container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+.search-from_field {
+  width: 60%;
+}
+
+.search-form_button {
+  width: 20%;
+}
