@@ -1,0 +1,79 @@
+.filter-button_container {
+  width: 120px;
+  height: 30px;
+  background-color: #ffffff;
+  border: solid 1px var(--secondary-color-dark);
+  box-shadow: 2px 2px 2px 1px #000000;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+}
+
+.filter-button_container:hover {
+  transform: scale(1.1);
+}
+
+.filter-button_container:focus {
+  outline: none;
+  border-width: 3px;
+}
+
+.filter-button_img {
+  max-width: 75px;
+  max-height: 15px;
+}
+
+.filter-button_title {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-normal-color);
+}
+
+@keyframes active-button {
+  0% {
+    background-color: #ffffff;
+    box-shadow: 2px 2px 2px 1px #000000;
+  }
+  50% {
+    box-shadow: 0px 0px 8px 0px #000000;
+  }
+  100% {
+    background-color: var(--secondary-color);
+    box-shadow: 0px 0px 0px 0px transparent;
+  }
+}
+
+@keyframes active-title {
+  0% {
+    color: var(--text-normal-color);
+  }
+  100% {
+    color: var(--text-secondary-color);
+  }
+}
+
+.filter-button_container.activate {
+  background-color: var(--secondary-color);
+  box-shadow: 0px 0px 0px 0px transparent;
+  animation: active-button 1s ease-in-out;
+}
+
+.filter-button_container.activate .filter-button_title {
+  color: var(--text-secondary-color);
+  animation: active-title 1s ease-out;
+}
+
+.filter-button_container.deactivate {
+  background-color: #ffffff;
+  box-shadow: 2px 2px 2px 1px #000000;
+  animation: active-button 1s ease-in-out;
+  animation-direction: reverse;
+}
+
+.filter-button_container.deactivate .filter-button_title {
+  color: var(--text-normal-color);
+  animation: active-title 1s ease-out;
+  animation-direction: reverse;
+}
+
+
+
