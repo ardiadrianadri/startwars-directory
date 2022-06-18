@@ -16,6 +16,7 @@ const Template = (args) => <StarwarsResultsGrid {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
+  showTitles: true,
   dataList: [
     {
       id: 1,
@@ -83,5 +84,6 @@ Default.args = {
 
 export const noResults = Template.bind({})
 noResults.args = {
+  showTitles: true,
   dataList: []
 }
