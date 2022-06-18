@@ -1,14 +1,24 @@
 .search-from_container {
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.search-form_field-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
   align-items: flex-end;
 }
 
 .search-from_field {
   width: 60%;
+  margin-left: 10px;
 }
 
 .search-form_button {
   width: 20%;
+  margin-right: 20px;
 }
