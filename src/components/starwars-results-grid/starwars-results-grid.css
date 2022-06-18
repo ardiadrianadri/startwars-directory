@@ -1,0 +1,25 @@
+.results-grid_title {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-important);
+  color: var(--text-normal-color);
+}
+
+.results-grid_grid {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.results-grid_no-results-found {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.results-grid_no-results_img {
+  width: 600px;
+  border-radius: var(--border-radius);
+}

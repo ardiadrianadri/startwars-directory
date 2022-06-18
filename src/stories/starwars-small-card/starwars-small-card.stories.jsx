@@ -18,6 +18,7 @@ export const Default = Template.bind({});
 Default.args = {
   id: '1',
   title: 'Card example',
+  type: 'character',
   image: noImage,
   favorite: false
 };
