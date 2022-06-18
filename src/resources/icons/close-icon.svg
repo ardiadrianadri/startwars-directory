@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>close icon</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Login-+-error" transform="translate(-1290.000000, -237.000000)">
+            <g id="success-modal" transform="translate(63.000000, 220.000000)">
+                <g id="close-icon" transform="translate(1233.000000, 23.000000)">
+                    <path d="M37.4664389,3.70711454 L44.2928855,10.5335611 L31.3258777,23.5 L44.2928855,36.4664389 L37.4664252,43.2928991 L24.4989727,30.3258777 L11.5335475,43.2928718 L4.7071009,36.4664252 L17.673095,23.5 L4.7071009,10.5335748 L11.5335611,3.70711454 L24.5,16.6741223 L37.4664389,3.70711454 Z" id="Combined-Shape" stroke="#979797" fill="#E50303"></path>
+                    <circle id="Oval" stroke="#E50303" stroke-width="11" cx="24" cy="24" r="24"></circle>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
