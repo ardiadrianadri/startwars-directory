@@ -6,6 +6,7 @@
   box-shadow: 2px 2px 2px 1px #000000;
   cursor: pointer;
   border-radius: var(--border-radius);
+  margin: 10px;
 }
 
 .filter-button_container:hover {
