@@ -46,6 +46,15 @@
   border-color: var(--primary-color-dark);
 }
 
+.button_container.alert > button {
+  background-color: var(--alert-color);
+  color: var(--text-alert-color);
+}
+
+.button_container.alert > button:focus {
+  border-color: var(--primary-color-dark);
+}
+
 .button_container.large > button {
   width: 522px;
   height: 75px;
