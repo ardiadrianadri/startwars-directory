@@ -1,0 +1,18 @@
+.render-data_container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.render-data_cell {
+  font-size: var(--font-size-normal);
+  color: var(--text-normal-color);
+  padding: 0px 10px;
+  text-align: right;
+  font-weight: var(--font-weight-medium);
+}
+
+.render-data_cell.key {
+  font-weight: var(--font-weight-important);
+}
+

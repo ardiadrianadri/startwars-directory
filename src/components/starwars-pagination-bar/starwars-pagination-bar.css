@@ -1,5 +1,6 @@
 .pagination-bar_container {
   max-width: 792px;
+  min-width: 90%;
   height: 71px;
   margin-left: auto;
   margin-right: auto;

@@ -2,6 +2,11 @@
   font-size: var(--font-size-normal);
   font-weight: var(--font-weight-important);
   color: var(--text-normal-color);
+  display: none;
+}
+
+.results-grid_title.show {
+  display: block;
 }
 
 .results-grid_grid {
