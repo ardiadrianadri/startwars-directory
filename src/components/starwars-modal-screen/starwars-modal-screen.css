@@ -1,0 +1,28 @@
+.modal-screen_container {
+  position: absolute;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 150vh;
+  display: none;
+  opacity: 0;
+  top: 0;
+  padding-top: 70px;
+}
+
+@keyframes open-modal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.modal-screen_container.show {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  opacity: 1;
+  animation: open-modal 1s ease;
+}
