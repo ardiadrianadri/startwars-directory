@@ -4,13 +4,13 @@ import StarwarsButton from '../starwars-button/starwars-button';
 import { BUTTON_COLORS, BUTTON_SIZES} from '../starwars-button/button-constants';
 import StarwarsStarButton from '../starwars-star-button/starwars-star-button';
 
-function StarwarsSmallCard({id, title, image, favorite, selected, changeFavorite}) {
+function StarwarsSmallCard({id, type, title, image, favorite, selected, changeFavorite}) {
   const onCardSelected = () => {
-    selected(id);
+    selected({ id, type });
   }
 
   const onFavoriteChange = (event) => {
-    changeFavorite({ id, favorite: event});
+    changeFavorite({ id, type, favorite: event});
   }
 
   return (
