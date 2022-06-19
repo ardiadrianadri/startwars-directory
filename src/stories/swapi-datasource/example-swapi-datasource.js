@@ -18,6 +18,7 @@ function ExampleSwapiDataSource({type, filter, id}) {
   };
 
   const errorManager = (err) => {
+    console.log(err);
     updateErrorTitle('Service error');
     updateErrorMsg(err.message || 'Error calling service');
     updateShowLoading(false);
