@@ -10,8 +10,9 @@ function StarwarsFiltersControl ({filters, filtersChange}) {
     filtersChange(copyFilters);
   }
 
-  const filtersButtons = Object.keys(filters).map(filterKey => (
+  const filtersButtons = Object.keys(filters).map((filterKey, index) => (
     <StarwarsFilterButton
+      key={index}
       title={filters[filterKey].title}
       image={filters[filterKey].image}
       active={filters[filterKey].active}
