@@ -4278,6 +4278,14 @@ axe-core@^4.3.5:
   resolved "https://globaldevtools.bbva.com:443/artifactory/api/npm/npm-repo/axe-core/-/axe-core-4.4.2.tgz#dcf7fb6dea866166c3eab33d68208afe4d5f670c"
   integrity sha1-3Pf7beqGYWbD6rM9aCCK/k1fZww=
 
+axios@^0.27.2:
+  version "0.27.2"
+  resolved "https://globaldevtools.bbva.com:443/artifactory/api/npm/npm-repo/axios/-/axios-0.27.2.tgz#207658cc8621606e586c85db4b41a750e756d972"
+  integrity sha1-IHZYzIYhYG5YbIXbS0GnUOdW2XI=
+  dependencies:
+    follow-redirects "^1.14.9"
+    form-data "^4.0.0"
+
 axobject-query@^2.2.0:
   version "2.2.0"
   resolved "https://globaldevtools.bbva.com:443/artifactory/api/npm/npm-repo/axobject-query/-/axobject-query-2.2.0.tgz#943d47e10c0b704aa42275e20edf3722648989be"
@@ -7070,7 +7078,7 @@ focus-lock@^0.8.0:
   dependencies:
     tslib "^1.9.3"
 
-follow-redirects@^1.0.0:
+follow-redirects@^1.0.0, follow-redirects@^1.14.9:
   version "1.15.1"
   resolved "https://globaldevtools.bbva.com:443/artifactory/api/npm/npm-repo/follow-redirects/-/follow-redirects-1.15.1.tgz#0ca6a452306c9b276e4d3127483e29575e207ad5"
   integrity sha1-DKakUjBsmyduTTEnSD4pV14getU=
@@ -7124,6 +7132,15 @@ form-data@^3.0.0:
   version "3.0.1"
   resolved "https://globaldevtools.bbva.com:443/artifactory/api/npm/npm-repo/form-data/-/form-data-3.0.1.tgz#ebd53791b78356a99af9a300d4282c4d5eb9755f"
   integrity sha1-69U3kbeDVqma+aMA1CgsTV65dV8=
+  dependencies:
+    asynckit "^0.4.0"
+    combined-stream "^1.0.8"
+    mime-types "^2.1.12"
+
+form-data@^4.0.0:
+  version "4.0.0"
+  resolved "https://globaldevtools.bbva.com:443/artifactory/api/npm/npm-repo/form-data/-/form-data-4.0.0.tgz#93919daeaf361ee529584b9b31664dc12c9fa452"
+  integrity sha1-k5Gdrq82HuUpWEubMWZNwSyfpFI=
   dependencies:
     asynckit "^0.4.0"
     combined-stream "^1.0.8"
