@@ -19,5 +19,7 @@ Default.args = {
   },
   search: '',
   favoriteType: '',
-  favoriteId: ''
+  favoriteId: '',
+  pageUrl: '',
+  pageType: '',
 };

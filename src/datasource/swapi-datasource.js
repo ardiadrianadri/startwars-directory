@@ -36,6 +36,10 @@ class SwapiDataSource {
     return this._getTypeInfo('vehicles', id);
   }
 
+  getByUrl(url) {
+    return axios.get(url).then((result) => result.data);
+  }
+
   _search(type, filter) {
     return axios.get(`${baseUrl}${type}?search=${filter}`).then((result) => result.data);
   }

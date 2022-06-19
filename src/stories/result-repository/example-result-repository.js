@@ -6,7 +6,7 @@ import StarwarsLoadingScreen from '../../components/starwars-loading-screen/star
 import StarwarsButton from '../../components/starwars-button/starwars-button';
 import { BUTTON_COLORS, BUTTON_SIZES } from '../../components/starwars-button/button-constants';
 
-function ExampleResultRepository({filters, search, favoriteType, favoriteId}) {
+function ExampleResultRepository({filters, search, favoriteType, favoriteId, pageUrl, pageType}) {
   const [showLoading, updateShowLoading] = useState(false);
   const [showError, updateShowError] = useState(false);
   const [errorTitle, updateErrorTitle] = useState('');
@@ -41,6 +41,13 @@ function ExampleResultRepository({filters, search, favoriteType, favoriteId}) {
     searchResultRepository.addFavorite(favoriteId, favoriteType);
   }
 
+  const goToPage = () => {
+    updateShowLoading(true);
+    searchResultRepository.goToPage(pageType, filters.favorites, pageUrl)
+      .then(successManager)
+      .catch(errorManager);
+  };
+
   return (
     <>
       <StarwarsLoadingScreen showLoading={showLoading} />
@@ -58,6 +65,9 @@ function ExampleResultRepository({filters, search, favoriteType, favoriteId}) {
       </StarwarsButton><br />
       <StarwarsButton color={BUTTON_COLORS.SECONDARY} size={BUTTON_SIZES.MEDIUM}>
         <button type='button' onClick={addToFavorites}>Add to Favorites</button>
+      </StarwarsButton><br />
+      <StarwarsButton color={BUTTON_COLORS.PRIMARY} size={BUTTON_SIZES.MEDIUM}>
+        <button type='button' onClick={goToPage}>Go to page</button>
       </StarwarsButton>
     </>
   );

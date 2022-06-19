@@ -113,24 +113,28 @@ class SearchResultRepository {
     return result;
   }
 
-  doSearch(filters, search) {
-    return Promise.all(this._listSearchs(filters, search))
-      .then((result) => result.flat())
-      .then((result) => result.reduce((acc, item) => {
-        if (filters.favorites) {
-          const type = Object.keys(item);
-          return {
-            ...acc,
-            [type]: {
-              ...item[type],
-              results: item[type].results.filter(
-                element => element.favorites
-              )
-            }
+  _transformData(favoritesFilter) {
+    return (acc, item) => {
+      if (favoritesFilter) {
+        const type = Object.keys(item);
+        return {
+          ...acc,
+          [type]: {
+            ...item[type],
+            results: item[type].results.filter(
+              element => element.favorites
+            )
           }
         }
-        return {...acc, ...item };
-      }, {}))
+      }
+      return {...acc, ...item };
+    }
+  }
+
+  doSearch(filters, search) {
+    const transformData = this._transformData(filters.favorites);
+    return Promise.all(this._listSearchs(filters, search))
+      .then((result) => result.reduce(transformData, {}))
   }
 
   addFavorite(id, type) {
@@ -143,6 +147,24 @@ class SearchResultRepository {
     if (this.favorites[type].indexOf(id) < 0) {
       this.favorites[type].push(id);
     }
+  }
+
+  goToPage(type, favoritesFilter, urlPage) {
+    return swapiDataSource.getByUrl(urlPage)
+      .then(this._successManager(type))
+      .then((data) => {
+        if (favoritesFilter) {
+          return {
+            [type]: {
+              ...data[type],
+              results: data[type].results.filter((item) => item.favorites === favoritesFilter)
+            }
+          }
+        }
+
+        return data;
+      })
+      .catch(this._errorManager(type));
   }
 }
 
