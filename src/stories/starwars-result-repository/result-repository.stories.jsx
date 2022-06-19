@@ -15,6 +15,9 @@ Default.args = {
     characters: false,
     planets: false,
     starships: false,
+    favorites: false,
   },
-  search: ''
+  search: '',
+  favoriteType: '',
+  favoriteId: ''
 };

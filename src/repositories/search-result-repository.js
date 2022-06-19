@@ -20,6 +20,33 @@ const getPictures = {
 
 class SearchResultRepository {
 
+  constructor() {
+    this.favorites = {
+      [CHARACTERS]: [],
+      [PLANETS]: [],
+      [STARSHIPS]: [],
+    }
+  }
+
+  _searchCharacters(search) {
+    return swapiDataSource.searchCharacters(search)
+    .then(this._successManager(CHARACTERS))
+    .catch(this._errorManager(CHARACTERS));
+  }
+
+  _searchPlanets(search) {
+    return swapiDataSource.searchPlanets(search)
+    .then(this._successManager(PLANETS))
+    .catch(this._errorManager(PLANETS));
+  }
+
+  _searchStarships(search) {
+    return swapiDataSource.searchStarships(search)
+    .then(this._successManager(STARSHIPS))
+    .catch(this._errorManager(STARSHIPS));
+  }
+  
+
   _errorManager(type) {
     return (error) => {
       if (error.request && error.request.status === 404) {
@@ -32,24 +59,30 @@ class SearchResultRepository {
 
   _successManager(type) {
     return (data) => {
-      console.log('NNN results: ', data);
-      const results = data.results.map(item => ({
-            id: item.id,
-            type: type,
-            name: item.name,
-            picture: getPictures[type](item.name),
-            favorite: false,
-          }));
-      const pagination = {
-        [type]: {
-          nextPage: data.next,
-          prevPage: data.previous,
+      console.log(data);
+      const results = data.results.map(item => {
+        const localType = type === CHARACTERS ? 'people' : type;
+        const id = item.url.split(localType)[1]?.slice(1,-1);
+
+        return {
+          id,
+          type: type,
+          name: item.name,
+          picture: getPictures[type](item.name),
+          favorites: this.favorites[type].indexOf(id) > -1
         }
+      });
+
+      const pagination = {
+        nextPage: data.next,
+        prevPage: data.previous,
       }
 
       return {
-        pagination,
-        results,
+        [type]: {
+          pagination,
+          results,
+        }
       }
     }
   }
@@ -57,40 +90,23 @@ class SearchResultRepository {
   _listSearchs(filters, search) {
     let result = [];
 
-    const searchCharacters = swapiDataSource.searchCharacters(search)
-      .then(this._successManager(CHARACTERS))
-      .catch(this._errorManager(CHARACTERS));
-
-    const searchPlanets = swapiDataSource.searchPlanets(search)
-      .then(this._successManager(PLANETS))
-      .catch(this._errorManager(PLANETS));
-
-    const searchStarships = [
-      swapiDataSource.searchStarships(search)
-        .then(this._successManager(STARSHIPS))
-        .catch(this._errorManager(STARSHIPS)),
-      swapiDataSource.searchVehicles(search)
-        .then(this._successManager(STARSHIPS))
-        .catch(this._errorManager(STARSHIPS))
-    ]
-
     if (filters.characters) {
-      result.push(searchCharacters);
+      result.push(this._searchCharacters(search));
     }
 
     if (filters.planets) {
-      result.push(searchPlanets);
+      result.push(this._searchPlanets(search));
     }
 
     if (filters.starships) {
-      result = result.concat(searchStarships);
+      result.push(this._searchStarships(search));
     }
 
     if (!result.length) {
       result = [
-        searchCharacters,
-        searchPlanets,
-        ...searchStarships
+        this._searchCharacters(search),
+        this._searchPlanets(search),
+        this._searchStarships(search)
       ]
     }
 
@@ -101,15 +117,32 @@ class SearchResultRepository {
     return Promise.all(this._listSearchs(filters, search))
       .then((result) => result.flat())
       .then((result) => result.reduce((acc, item) => {
-        acc.pagination = {...acc.pagination, ... item.pagination };
-        acc.results = acc.results.concat(item.results);
+        if (filters.favorites) {
+          const type = Object.keys(item);
+          return {
+            ...acc,
+            [type]: {
+              ...item[type],
+              results: item[type].results.filter(
+                element => element.favorites
+              )
+            }
+          }
+        }
+        return {...acc, ...item };
+      }, {}))
+  }
 
-        return acc;
-      }, { pagination: {}, results: [] }))
-      .then((data) => ({
-        ...data,
-        results: data.results.sort((itemA, itemB) => itemA.name < itemB.name ? -1 : 1),
-      }))
+  addFavorite(id, type) {
+    const allTypes = [CHARACTERS, PLANETS, STARSHIPS];
+
+    if (allTypes.indexOf(type) < 0) {
+      throw new StarwarsError(ERRORS_CODES.NOT_VALID_TYPE, type, 'Invalid type of data');
+    }
+
+    if (this.favorites[type].indexOf(id) < 0) {
+      this.favorites[type].push(id);
+    }
   }
 }
 
