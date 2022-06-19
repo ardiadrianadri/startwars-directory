@@ -15,4 +15,21 @@ const Template = (args) => <StartwarsSearchForm {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   searchValue: 'Previous search value',
+  filters: {
+    characters: false,
+    startships: false,
+    planets: false,
+    favorites: false
+  }
 };
+
+export const someFiltersActivated = Template.bind({});
+someFiltersActivated.args = {
+  searchValue: 'Previous search value',
+  filters: {
+    characters: true,
+    startships: false,
+    planets: true,
+    favorites: false
+  }
+}

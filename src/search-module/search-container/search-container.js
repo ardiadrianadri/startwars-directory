@@ -14,10 +14,10 @@ function SearchContainer() {
   const onSubmitEvent = (event) => {
     let path = `${pathname}?search=${event.stringFilter}`;
 
-    path = Object.values(event.typeFilters)
+    path = Object.entries(event.typeFilters)
       .reduce((acc, value) => {
-        if (value.active === FILTER_BUTTON_STATES.ACTIVATE) {
-          acc +=`&${value.title}=true`
+        if (value[1].active === FILTER_BUTTON_STATES.ACTIVATE) {
+          acc +=`&${value[0]}=true`
         }
 
         return acc;

@@ -6,25 +6,26 @@ import StartwarsButton from '../starwars-button/starwars-button';
 import { BUTTON_COLORS, BUTTON_SIZES} from '../starwars-button/button-constants';
 import StarwarsFiltersControl from '../starwars-filters-control/starwars-filters-control';
 import starActiveIcon from '../../resources/icons/Star-active.svg';
+import { FILTER_BUTTON_STATES } from '../starwars-filter-button/starwars-filter-button-states';
 
-function StarwarsSearchForm({searchValue, submitEvent}) {
+function StarwarsSearchForm({searchValue, filters, submitEvent}) {
   const [searchInput, setSearchValue] = useState(searchValue || '');
   const [filtersState, setFiltersValue] = useState({
     characters: {
       title: 'Characters',
-      active: null,
+      active: filters?.characters ? FILTER_BUTTON_STATES.ACTIVATE : null,
     },
     startships: {
       title: 'Startships',
-      active: null,
+      active: filters?.startships ? FILTER_BUTTON_STATES.ACTIVATE : null,
     },
     planets: {
       title: 'Planets',
-      active: null,
+      active: filters?.planets ? FILTER_BUTTON_STATES.ACTIVATE : null,
     },
     favorites: {
       title: 'Favorites',
-      active: null,
+      active: filters?.favorites ? FILTER_BUTTON_STATES.ACTIVATE : null,
       image: starActiveIcon
     }
   })
