@@ -1,8 +1,10 @@
+import SearchContainer from '../../search-module/search-container/search-container';
+
 function StarwarsHome() {
   return (
-    <div>
-      <h1>This will be the home</h1>
-    </div>
+    <>
+      <SearchContainer />
+    </>
   )
 }
 
