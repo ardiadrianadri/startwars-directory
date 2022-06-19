@@ -4,7 +4,6 @@ import StarwarsModalScreen from '../starwars-modal-screen/starwars-modal-screen'
 import searchinGif from '../../resources/gifs/searching.gif';
 
 function StarwarsLoadingScreen({showLoading}) {
-  console.log('NNN showLoading: ', showLoading);
   return (
     <StarwarsModalScreen show={showLoading}>
       <div className="loading-screen_container">

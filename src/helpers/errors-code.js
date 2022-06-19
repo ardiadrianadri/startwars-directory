@@ -1,0 +1,4 @@
+export const ERRORS_CODES = {
+  GENERIC_ERROR: '01500',
+  NOT_FOUND_ERROR: '01404'
+}

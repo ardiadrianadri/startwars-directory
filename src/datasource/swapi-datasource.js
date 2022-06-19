@@ -37,11 +37,11 @@ class SwapiDataSource {
   }
 
   _search(type, filter) {
-    return axios.get(`${baseUrl}${type}?search=${filter}`);
+    return axios.get(`${baseUrl}${type}?search=${filter}`).then((result) => result.data);
   }
 
   _getTypeInfo(type, id) {
-    return axios.get(`${baseUrl}${type}/${id}`);
+    return axios.get(`${baseUrl}${type}/${id}`).then((result) => result.data);
   }
 }
 
