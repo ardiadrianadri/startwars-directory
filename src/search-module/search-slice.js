@@ -8,14 +8,19 @@ const initialState = {
   planetsResults: [],
   planetsPagination: null,
   starshipsResults: [],
-  starshipsPagination: null
+  starshipsPagination: null,
+  previousSearch: null,
+  previousFilter: null,
 }
 
 export const searchSlice = createSlice({
   name: 'search',
   initialState,
   reducers: {
-    searchRequest: state => {
+    searchRequest: (state, action) => {
+      const { search, filters } = action.payload;
+      state.previousFilter = filters;
+      state.previousSearch = search;
       state.loading = true;
       state.error = null;
     },
@@ -38,11 +43,15 @@ export const searchSlice = createSlice({
       }
 
       state.loading = false;
+      state.previousFilter = null;
+      state.previousSearch = null;
     },
     searchRequestError: (state, action) => {
       const { title, message } = action.payload;
 
       state.error = { title, message }
+      state.previousFilter = null;
+      state.previousSearch = null;
     }
   }
 });

@@ -59,7 +59,6 @@ class SearchResultRepository {
 
   _successManager(type) {
     return (data) => {
-      console.log(data);
       const results = data.results.map(item => {
         const localType = type === CHARACTERS ? 'people' : type;
         const id = item.url.split(localType)[1]?.slice(1,-1);
