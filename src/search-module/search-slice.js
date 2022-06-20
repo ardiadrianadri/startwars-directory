@@ -43,6 +43,7 @@ export const searchSlice = createSlice({
       const { title, message } = action.payload;
 
       state.error = { title, message }
+      state.loading = false;
     }
   }
 });

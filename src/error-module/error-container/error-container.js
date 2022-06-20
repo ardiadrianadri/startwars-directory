@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import StarwarsModalError from '../../components/starwars-modal-error/starwars-modal-error';
@@ -14,6 +14,10 @@ function ErrorContainer() {
   const onCloseError = () => {
     updateShowError(false);
   }
+
+  useEffect(() => {
+    updateShowError(!!(error))
+  }, [error])
 
   return (
     <StarwarsModalError
