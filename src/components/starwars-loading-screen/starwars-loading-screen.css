@@ -1,5 +1,6 @@
 .loading-screen_container {
   width: 90%;
+  margin-top: 50vh;
   background-color: transparent;
   display: flex;
   flex-direction: column;

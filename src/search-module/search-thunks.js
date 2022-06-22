@@ -11,10 +11,29 @@ const genericError = {
   message: 'A disturbance in the force prevents us from communicating with the servers'
 };
 
+function runTheSearch(filters, lastSearch, dispatch) {
+  dispatch(searchRequest({ filters, lastSearch }));
+  return searchResultRepository.doSearch(filters, lastSearch)
+    .then(data => {
+      dispatch(searchRequestSuccess(data));
+    })
+    .catch(err => {
+      console.error(err);
+      dispatch(searchRequestError(genericError));
+    });
+}
+
 export function searchThunk(filters, search) {
   return (dispatch) => {
-    dispatch(searchRequest({ favoritesFilter: filters.favorites }));
-    searchResultRepository.doSearch(filters, search)
+    runTheSearch(filters, search, dispatch);
+  }
+}
+
+export function paginationThunk(type, urlPage) {
+  return (dispatch, getState) => {
+    const { filters, lastSearch } = getState().search;
+    dispatch(searchRequest({ filters, lastSearch }));
+    searchResultRepository.goToPage(type, filters.favorites, urlPage)
       .then(data => {
         dispatch(searchRequestSuccess(data));
       })
@@ -25,17 +44,15 @@ export function searchThunk(filters, search) {
   }
 }
 
-export function paginationThunk(type, urlPage) {
+export function setFavorites(id, type, favorite) {
   return (dispatch, getState) => {
-    const favoritesFilter = getState().search.favoritesFilter;
-    dispatch(searchRequest({ favoritesFilter }));
-    searchResultRepository.goToPage(type, favoritesFilter, urlPage)
-      .then(data => {
-        dispatch(searchRequestSuccess(data));
-      })
-      .catch((err) => {
-        console.error(err);
-        dispatch(searchRequestError(genericError));
-      })
+    if (favorite) {
+      searchResultRepository.addFavorite(id, type);
+    } else {
+      searchResultRepository.removeFavorite(id, type);
+    }
+
+    const { filters, lastSearch } = getState().search;
+    runTheSearch(filters, lastSearch, dispatch);
   }
 }
