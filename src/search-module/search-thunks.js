@@ -13,7 +13,7 @@ const genericError = {
 
 export function searchThunk(filters, search) {
   return (dispatch) => {
-    dispatch(searchRequest());
+    dispatch(searchRequest({ favoritesFilter: filters.favorites }));
     searchResultRepository.doSearch(filters, search)
       .then(data => {
         dispatch(searchRequestSuccess(data));
@@ -25,9 +25,10 @@ export function searchThunk(filters, search) {
   }
 }
 
-export function paginationThunk(type, favoritesFilter, urlPage) {
-  return (dispatch) => {
-    dispatch(searchRequest());
+export function paginationThunk(type, urlPage) {
+  return (dispatch, getState) => {
+    const favoritesFilter = getState().search.favoritesFilter;
+    dispatch(searchRequest({ favoritesFilter }));
     searchResultRepository.goToPage(type, favoritesFilter, urlPage)
       .then(data => {
         dispatch(searchRequestSuccess(data));

@@ -34,13 +34,13 @@ function CharactersResultsContainer() {
 
   const onNextPage = () => {
     dispatch(
-      paginationThunk('characters', false, pagination.nextPage)
+      paginationThunk('characters', pagination.nextPage)
     );
   };
 
   const onPrevPage = () => {
     dispatch(
-      paginationThunk('characters', false, pagination.prevPage)
+      paginationThunk('characters', pagination.prevPage)
     );
   };
 
@@ -62,12 +62,18 @@ function CharactersResultsContainer() {
         elementFavorite={onElementFavorite}
         elementSelected={onElementSelected}
       />
-      <StarwarsPaginationBar
-        isThereNextPage={!!pagination?.nextPage}
-        isTherePrevPage={!!pagination?.prevPage}
-        goNext={onNextPage}
-        goPrev={onPrevPage}
-      />
+      {
+        (results.length)
+          ? (
+            <StarwarsPaginationBar
+              isThereNextPage={!!pagination?.nextPage}
+              isTherePrevPage={!!pagination?.prevPage}
+              goNext={onNextPage}
+              goPrev={onPrevPage}
+            />
+          )
+        : null
+      }
     </StarwarsAccordion>
   );
 }

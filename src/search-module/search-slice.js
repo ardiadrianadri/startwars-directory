@@ -9,15 +9,18 @@ const initialState = {
   planetsPagination: null,
   starshipsResults: [],
   starshipsPagination: null,
+  favoritesFilter: false,
 }
 
 export const searchSlice = createSlice({
   name: 'search',
   initialState,
   reducers: {
-    searchRequest: (state) => {
+    searchRequest: (state, action) => {
+      const { favoritesFilter } = (action) ? action.payload : false;
       state.loading = true;
       state.error = null;
+      state.favoritesFilter = favoritesFilter;
     },
     searchRequestSuccess: (state, action) => {
       const searchData = action.payload;
