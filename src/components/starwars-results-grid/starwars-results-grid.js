@@ -11,6 +11,7 @@ function StarwarsResultsGrid({dataList, elementSelected, elementFavorite}) {
       {...element}
       title={element.name}
       selected={elementSelected}
+      favorite={element.favorites}
       changeFavorite={elementFavorite}
     />
   ));

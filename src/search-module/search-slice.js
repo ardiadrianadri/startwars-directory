@@ -9,7 +9,8 @@ const initialState = {
   planetsPagination: null,
   starshipsResults: [],
   starshipsPagination: null,
-  favoritesFilter: false,
+  filters: null,
+  lastSearch: ''
 }
 
 export const searchSlice = createSlice({
@@ -17,10 +18,11 @@ export const searchSlice = createSlice({
   initialState,
   reducers: {
     searchRequest: (state, action) => {
-      const { favoritesFilter } = (action) ? action.payload : false;
+      const { filters, lastSearch } = (action) ? action.payload : false;
       state.loading = true;
       state.error = null;
-      state.favoritesFilter = favoritesFilter;
+      state.filters = {...filters};
+      state.lastSearch = lastSearch;
     },
     searchRequestSuccess: (state, action) => {
       const searchData = action.payload;

@@ -1,5 +1,6 @@
 .modal-error_container {
   width: 90%;
+  margin-top: 200px;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;

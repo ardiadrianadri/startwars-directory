@@ -105,7 +105,7 @@ class SearchResultRepository {
       result = [
         this._searchCharacters(search),
         this._searchPlanets(search),
-        this._searchStarships(search)
+        this._searchStarships(search),
       ]
     }
 
@@ -130,6 +130,16 @@ class SearchResultRepository {
     }
   }
 
+  _checkType(type) {
+    const allTypes = [CHARACTERS, PLANETS, STARSHIPS];
+      
+      if (allTypes.indexOf(type) < 0) {
+        return false;
+      }
+
+      return true;
+  }
+
   doSearch(filters, search) {
     const transformData = this._transformData(filters.favorites);
     return Promise.all(this._listSearchs(filters, search))
@@ -137,14 +147,26 @@ class SearchResultRepository {
   }
 
   addFavorite(id, type) {
-    const allTypes = [CHARACTERS, PLANETS, STARSHIPS];
 
-    if (allTypes.indexOf(type) < 0) {
+    if (!this._checkType(type)) {
       throw new StarwarsError(ERRORS_CODES.NOT_VALID_TYPE, type, 'Invalid type of data');
     }
 
     if (this.favorites[type].indexOf(id) < 0) {
       this.favorites[type].push(id);
+    }
+  }
+
+  removeFavorite(id, type) {
+    if (!this._checkType(type)) {
+      throw new StarwarsError(ERRORS_CODES.NOT_VALID_TYPE, type, 'Invalid type of data');
+    }
+
+    const index = this.favorites[type].indexOf(id);
+    if (index > -1) {
+      const headList = this.favorites[type].slice(0, index);
+      const tailList = this.favorites[type].slice(index + 1, this.favorites.length);
+      this.favorites[type] = [...headList, ...tailList];
     }
   }
 

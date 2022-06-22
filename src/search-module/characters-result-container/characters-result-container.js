@@ -7,7 +7,7 @@ import { ACCORDION_STATES} from '../../components/starwars-accordion/starwars-ac
 import StarwarsResultsGrid from '../../components/starwars-results-grid/starwars-results-grid';
 import StarwarsPaginationBar from '../../components/starwars-pagination-bar/starwars-pagination-bar';
 
-import { paginationThunk } from '../../search-module/search-thunks';
+import { paginationThunk, setFavorites } from '../../search-module/search-thunks';
 import { charactersResultsSelector } from '../search-selectors';
 
 function CharactersResultsContainer() {
@@ -30,6 +30,7 @@ function CharactersResultsContainer() {
 
   const onElementFavorite = (event) => {
     console.log('NNN element favorite: ', event);
+    dispatch(setFavorites(event.id, event.type, event.favorite));
   };
 
   const onNextPage = () => {
@@ -46,7 +47,6 @@ function CharactersResultsContainer() {
 
 
   useEffect(() => {
-    console.log('NNN pagination: ', pagination);
     if (results.length) {
       updateAccordionState(ACCORDION_STATES.OPEN);
     } else if (accordionState === ACCORDION_STATES.OPEN) {

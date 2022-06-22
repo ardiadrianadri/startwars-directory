@@ -7,7 +7,6 @@
   display: none;
   opacity: 0;
   top: 0;
-  padding-top: 70px;
 }
 
 @keyframes open-modal {
