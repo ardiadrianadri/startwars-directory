@@ -5,3 +5,10 @@ export function searchLoadingSelector(state) {
 export function searchErrorSelector(state) {
   return state.search.error;
 }
+
+export function charactersResultsSelector(state) {
+  return {
+    results: state.search.charactersResults,
+    pagination: state.search.charactersPagination
+  }
+}
