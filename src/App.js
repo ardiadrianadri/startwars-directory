@@ -10,7 +10,7 @@ function App() {
       <LoadingContainer />
       <ErrorContainer />
       <div className="container">
-        <StarwarsNavbar title="Startwars"/>
+        <StarwarsNavbar title="Starwars"/>
         <Outlet />
       </div>
     </>

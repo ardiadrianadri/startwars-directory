@@ -5,7 +5,7 @@ export default {
   title: 'Atoms/Starwars accordion',
   component: ExampleAccordion,
   argTypes: {
-    changeState: { action: 'onClick' }
+    changeState: { action: 'changeState' },
   }
 }
 

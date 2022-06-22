@@ -41,26 +41,6 @@
   margin: 0px;
 }
 
-@keyframes turn-arrow {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: scale(90deg);
-  }
-}
-
-.accordion_header_button_img.open {
-  transform: rotate(90deg);
-  animation: turn-arrow 1s ease;
-}
-
-.accordion_header_button_img.close {
-  transform: rotate(0deg);
-  animation: turn-arrow 1s ease;
-  animation-direction: reverse;
-}
-
 .accordion_header_title {
   margin-left: 20px;
   font-size: var(--font-size-normal);
@@ -70,31 +50,5 @@
 
 .accordion_body {
   width: 100%;
-  display: none;
-  opacity: 0;
   padding-top: 20px;
-}
-
-@keyframes exapand-accordion {
-  0% {
-    display: block;
-    opacity: 0;
-  }
-  100% {
-    display: block;
-    opacity: 1;
-  }
-}
-
-.accordion_body.open {
-  display: block;
-  opacity: 1;
-  animation: expand-accordion 1s ease;
-}
-
-.accordion_body.close {
-  display: none;
-  opacity: 0;
-  animation: expand-accordion 1s ease;
-  animation-direction: reverse;
 }
