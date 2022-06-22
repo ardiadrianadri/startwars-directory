@@ -1,15 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
-import { useSelector} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import StarwarsAccordion from '../../components/starwars-accordion/starwars-accodion';
 import { ACCORDION_STATES} from '../../components/starwars-accordion/starwars-accordion-states';
 import StarwarsResultsGrid from '../../components/starwars-results-grid/starwars-results-grid';
+import StarwarsPaginationBar from '../../components/starwars-pagination-bar/starwars-pagination-bar';
 
+import { paginationThunk } from '../../search-module/search-thunks';
 import { charactersResultsSelector } from '../search-selectors';
 
 function CharactersResultsContainer() {
   const { results, pagination } = useSelector(charactersResultsSelector);
+  const dispatch = useDispatch();
   const title = 'Characters';
   const [accordionState, updateAccordionState] = useState(ACCORDION_STATES.CLOSE);
 
@@ -29,8 +32,21 @@ function CharactersResultsContainer() {
     console.log('NNN element favorite: ', event);
   };
 
+  const onNextPage = () => {
+    dispatch(
+      paginationThunk('characters', false, pagination.nextPage)
+    );
+  };
+
+  const onPrevPage = () => {
+    dispatch(
+      paginationThunk('characters', false, pagination.prevPage)
+    );
+  };
+
 
   useEffect(() => {
+    console.log('NNN pagination: ', pagination);
     if (results.length) {
       updateAccordionState(ACCORDION_STATES.OPEN);
     } else if (accordionState === ACCORDION_STATES.OPEN) {
@@ -45,6 +61,12 @@ function CharactersResultsContainer() {
         dataList={results}
         elementFavorite={onElementFavorite}
         elementSelected={onElementSelected}
+      />
+      <StarwarsPaginationBar
+        isThereNextPage={!!pagination?.nextPage}
+        isTherePrevPage={!!pagination?.prevPage}
+        goNext={onNextPage}
+        goPrev={onPrevPage}
       />
     </StarwarsAccordion>
   );
