@@ -35,7 +35,7 @@ function StarwarsAccordion ({title, state, changeState, children}) {
         </button>
         <div className="accordion_header_title">{title}</div>
       </div>
-      <animated.div style={stylesBody} className="accordion_body">
+      <animated.div style={stylesBody} className={`accordion_body ${state}`}>
           {children}
       </animated.div>
     </div>
