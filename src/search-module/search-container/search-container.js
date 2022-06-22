@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 
 import StarwarsSearchForm from '../../components/starwars-search-form/starwars-search-form';
 import { FILTER_BUTTON_STATES } from '../../components/starwars-filter-button/starwars-filter-button-states';
-import searchThunk from '../search-thunks';
+import { searchThunk } from '../search-thunks';
 
 function SearchContainer() {
   const dispatch = useDispatch();
