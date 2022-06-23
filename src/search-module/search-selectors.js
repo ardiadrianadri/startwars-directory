@@ -19,3 +19,10 @@ export function planetsResultsSelector(state) {
     pagination: state.search.planetsPagination
   };
 }
+
+export function starshipsResultsSelector(state) {
+  return {
+    results: state.search.starshipsResults,
+    pagination: state.search.starshipsPagination
+  }
+}

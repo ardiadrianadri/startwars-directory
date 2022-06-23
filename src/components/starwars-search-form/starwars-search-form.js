@@ -15,9 +15,9 @@ function StarwarsSearchForm({searchValue, filters, submitEvent}) {
       title: 'Characters',
       active: filters?.characters ? FILTER_BUTTON_STATES.ACTIVATE : null,
     },
-    startships: {
-      title: 'Startships',
-      active: filters?.startships ? FILTER_BUTTON_STATES.ACTIVATE : null,
+    starships: {
+      title: 'Starships',
+      active: filters?.starships ? FILTER_BUTTON_STATES.ACTIVATE : null,
     },
     planets: {
       title: 'Planets',
