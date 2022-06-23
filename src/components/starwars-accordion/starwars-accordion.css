@@ -51,4 +51,10 @@
 .accordion_body {
   width: 100%;
   padding-top: 20px;
+  display: none;
+  margin-bottom: 30px;
+}
+
+.accordion_body.open {
+  display: block;
 }
