@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom';
 import App from './App';
 import StarwarsHome from './views/starwars-home/starwars-home'
+import StarwarsDetailView from './views/starwars-detail-view/starwars-detail-view';
 import store from './store';
 import { Provider } from 'react-redux';
 
@@ -20,6 +21,7 @@ root.render(
         <Routes>
           <Route path='/' element={<App />}>
             <Route index element={<StarwarsHome />} />
+            <Route path='/detail/:type/:id' element={<StarwarsDetailView />} />
           </Route>
         </Routes>
       </BrowserRouter>
