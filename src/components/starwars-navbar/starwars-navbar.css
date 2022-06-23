@@ -1,6 +1,6 @@
 .nav-bar_container {
   width: 100%;
-  height: 128px;
+  height: 80px;
   padding: 0px 29px;
   background-color: var(--primary-color);
   color: var(--text-color-primary);

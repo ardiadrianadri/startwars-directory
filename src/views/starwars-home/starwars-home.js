@@ -8,12 +8,10 @@ function StarwarsHome() {
   return (
     <>
       <SearchContainer />
-      <span className="result-container">
+      <div className='results_view'>
         <CharactersResultsContainer />
-      </span>
-      <span className="result-container">
         <PlanetsResultsContainer />
-      </span>
+      </div>
     </>
   )
 }

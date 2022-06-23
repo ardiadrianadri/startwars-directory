@@ -26,6 +26,9 @@ export const searchSlice = createSlice({
     },
     searchRequestSuccess: (state, action) => {
       const searchData = action.payload;
+      state.charactersResults = [];
+      state.planetsResults = [];
+      state.starshipsResults = [];
 
       if (searchData.characters) {
         state.charactersResults = searchData.characters.results;
