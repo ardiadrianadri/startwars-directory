@@ -8,6 +8,7 @@ import {
   useElementFavorite,
   usePagination
 } from '../../helpers/customHooks';
+import { CHARACTERS } from '../../helpers/starwars-types';
 
 function CharactersResultsContainer() {
   const title = 'Characters';
@@ -21,7 +22,7 @@ function CharactersResultsContainer() {
   const [
     onPrevPage,
     onNextPage
-  ] = usePagination(charactersResultsSelector, 'characters');
+  ] = usePagination(charactersResultsSelector, CHARACTERS);
 
 
   const onElementSelected = (event) => {

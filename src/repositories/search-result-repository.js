@@ -4,13 +4,15 @@ import {
   getPlanetsPicture
 } from '../helpers/get-pictures';
 import { ERRORS_CODES } from '../helpers/errors-code';
-import StarwarsError from '../helpers/startwars-error';
+import StarwarsError from '../helpers/starwars-error';
 
 import swapiDataSource from '../datasource/swapi-datasource';
-
-const CHARACTERS = 'characters';
-const PLANETS = 'planets';
-const STARSHIPS = 'starships';
+import {
+  CHARACTERS,
+  PLANETS,
+  STARSHIPS
+} from '../helpers/starwars-types';
+import favoritesRepository from './favorites-repository';
 
 const getPictures = {
   [CHARACTERS]: getCharactesPicture,
@@ -19,14 +21,6 @@ const getPictures = {
 }
 
 class SearchResultRepository {
-
-  constructor() {
-    this.favorites = {
-      [CHARACTERS]: [],
-      [PLANETS]: [],
-      [STARSHIPS]: [],
-    }
-  }
 
   _searchCharacters(search) {
     return swapiDataSource.searchCharacters(search)
@@ -68,7 +62,7 @@ class SearchResultRepository {
           type: type,
           name: item.name,
           picture: getPictures[type](item.name),
-          favorites: this.favorites[type].indexOf(id) > -1
+          favorites: favoritesRepository.existInFavorites(id, type)
         }
       });
 
@@ -130,16 +124,6 @@ class SearchResultRepository {
     }
   }
 
-  _checkType(type) {
-    const allTypes = [CHARACTERS, PLANETS, STARSHIPS];
-      
-      if (allTypes.indexOf(type) < 0) {
-        return false;
-      }
-
-      return true;
-  }
-
   doSearch(filters, search) {
     const transformData = this._transformData(filters.favorites);
     return Promise.all(this._listSearchs(filters, search))
@@ -147,27 +131,11 @@ class SearchResultRepository {
   }
 
   addFavorite(id, type) {
-
-    if (!this._checkType(type)) {
-      throw new StarwarsError(ERRORS_CODES.NOT_VALID_TYPE, type, 'Invalid type of data');
-    }
-
-    if (this.favorites[type].indexOf(id) < 0) {
-      this.favorites[type].push(id);
-    }
+    favoritesRepository.addFavorite(id, type);
   }
 
   removeFavorite(id, type) {
-    if (!this._checkType(type)) {
-      throw new StarwarsError(ERRORS_CODES.NOT_VALID_TYPE, type, 'Invalid type of data');
-    }
-
-    const index = this.favorites[type].indexOf(id);
-    if (index > -1) {
-      const headList = this.favorites[type].slice(0, index);
-      const tailList = this.favorites[type].slice(index + 1, this.favorites.length);
-      this.favorites[type] = [...headList, ...tailList];
-    }
+    favoritesRepository.removeFavorite(id, type);
   }
 
   goToPage(type, favoritesFilter, urlPage) {

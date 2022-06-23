@@ -13,6 +13,13 @@ const initialState = {
   lastSearch: ''
 }
 
+function areFiltersEqual(filterA, filterB) {
+  
+  return filterA.characters === filterB.characters
+  && filterA.planets === filterB.planets
+  && filterA.starchips === filterB.starchips;
+}
+
 export const searchSlice = createSlice({
   name: 'search',
   initialState,
@@ -21,15 +28,20 @@ export const searchSlice = createSlice({
       const { filters, lastSearch } = (action) ? action.payload : false;
       state.loading = true;
       state.error = null;
+
+      if (state.filters && !areFiltersEqual(filters, state.filters)) {
+        state.charactersResults = [];
+        state.planetsResults = [];
+        state.starshipsResults = [];
+  
+      }
+
       state.filters = {...filters};
       state.lastSearch = lastSearch;
     },
     searchRequestSuccess: (state, action) => {
       const searchData = action.payload;
-      state.charactersResults = [];
-      state.planetsResults = [];
-      state.starshipsResults = [];
-
+    
       if (searchData.characters) {
         state.charactersResults = searchData.characters.results;
         state.charactersPagination = searchData.characters.pagination;

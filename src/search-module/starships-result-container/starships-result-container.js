@@ -9,6 +9,8 @@ import {
   usePagination
 } from '../../helpers/customHooks';
 
+import { STARSHIPS } from '../../helpers/starwars-types';
+
 function StarshipsResultsContainer() {
   const title = 'Starships';
   const [
@@ -21,7 +23,7 @@ function StarshipsResultsContainer() {
   const [
     onPrevPage,
     onNextPage
-  ] = usePagination(starshipsResultsSelector, 'starships');
+  ] = usePagination(starshipsResultsSelector, STARSHIPS);
 
   const onElementSelected = (event) => {
     console.log('NNN element selected: ', event);
