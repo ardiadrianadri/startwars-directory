@@ -9,6 +9,8 @@ import {
   usePagination
 } from '../../helpers/customHooks';
 
+import { PLANETS } from '../../helpers/starwars-types';
+
 function PlanetsResultsContainer() {
   const title = 'Planets';
   const [
@@ -21,7 +23,7 @@ function PlanetsResultsContainer() {
   const [
     onPrevPage,
     onNextPage
-  ] = usePagination(planetsResultsSelector, 'planets');
+  ] = usePagination(planetsResultsSelector, PLANETS);
 
   const onElementSelected = (event) => {
     console.log('NNN element selected: ', event);

@@ -7,10 +7,11 @@ import { ERRORS_CODES } from '../helpers/errors-code';
 import StarwarsError from '../helpers/startwars-error';
 
 import swapiDataSource from '../datasource/swapi-datasource';
-
-const CHARACTERS = 'characters';
-const PLANETS = 'planets';
-const STARSHIPS = 'starships';
+import {
+  CHARACTERS,
+  PLANETS,
+  STARSHIPS
+} from '../helpers/starwars-types';
 
 const getPictures = {
   [CHARACTERS]: getCharactesPicture,
