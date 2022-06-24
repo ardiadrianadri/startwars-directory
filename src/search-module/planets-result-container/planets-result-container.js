@@ -6,7 +6,8 @@ import { planetsResultsSelector } from '../search-selectors';
 import {
   useAccordionState,
   useElementFavorite,
-  usePagination
+  usePagination,
+  useNavigateToDetail
 } from '../../helpers/customHooks';
 
 import { PLANETS } from '../../helpers/starwars-types';
@@ -25,9 +26,7 @@ function PlanetsResultsContainer() {
     onNextPage
   ] = usePagination(planetsResultsSelector, PLANETS);
 
-  const onElementSelected = (event) => {
-    console.log('NNN element selected: ', event);
-  }
+  const onElementSelected = useNavigateToDetail();
 
   return (
     <StarwarsAccordion title={title} state={accordionState} changeState={onAccordionChange}>

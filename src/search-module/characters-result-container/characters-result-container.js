@@ -6,7 +6,8 @@ import { charactersResultsSelector } from '../search-selectors';
 import {
   useAccordionState,
   useElementFavorite,
-  usePagination
+  usePagination,
+  useNavigateToDetail
 } from '../../helpers/customHooks';
 import { CHARACTERS } from '../../helpers/starwars-types';
 
@@ -24,10 +25,7 @@ function CharactersResultsContainer() {
     onNextPage
   ] = usePagination(charactersResultsSelector, CHARACTERS);
 
-
-  const onElementSelected = (event) => {
-    console.log('NNN element selected: ', event);
-  };
+  const onElementSelected = useNavigateToDetail();
 
 
   return (
