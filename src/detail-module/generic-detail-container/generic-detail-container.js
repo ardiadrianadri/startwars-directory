@@ -16,13 +16,11 @@ function GenericDetailContainer() {
   const errorDetail = useSelector(detailErrorSelector);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (errorDetail) {
-      navigate('/');
-    } else {
-      dispatch(requestDetail(id, type));
-    }
-  }, [id, type, errorDetail]);
+  dispatch(requestDetail(id, type));
+
+  if (errorDetail) { 
+    navigate('/');
+  }
 
 
   return (
