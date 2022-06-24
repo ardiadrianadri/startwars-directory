@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { ACCORDION_STATES } from '../components/starwars-accordion/starwars-accordion-states';
 import { setFavorites, paginationThunk } from '../search-module/search-thunks';
@@ -53,5 +54,13 @@ export function usePagination(selector, type) {
       dispatch(paginationThunk(type, pagination.nextPage));
     }
   ]
+}
+
+export function useNavigateToDetail() {
+  const navigate = useNavigate();
+  
+  return ({id, type}) => {
+    navigate(`/detail/${type}/${id}`);
+  }
 }
 

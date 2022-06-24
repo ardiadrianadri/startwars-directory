@@ -1,11 +1,8 @@
-import { useParams } from 'react-router-dom';
+import GenericDetailContainer from "../../detail-module/generic-detail-container/generic-detail-container";
 
 function StarwarsDetailView() {
-  let params = useParams();
-
-  console.log('NNN params: ', params);
   return (
-    <h1>This will be the detail view</h1>
+    <GenericDetailContainer />
   );
 }
 

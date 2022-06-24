@@ -6,10 +6,7 @@ import {
   searchRequestError
 } from './search-slice';
 
-const genericError = {
-  title: 'These are not the droids you are looking for',
-  message: 'A disturbance in the force prevents us from communicating with the servers'
-};
+import { genericError } from '../helpers/errors-code';
 
 function runTheSearch(filters, lastSearch, dispatch) {
   dispatch(searchRequest({ filters, lastSearch }));
