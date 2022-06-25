@@ -37,10 +37,10 @@ export function detailGridDataSelector(type) {
 }
 
 export function detailSizeGridFooters(state) {
-  let numberFooters = state.detail.charactersList ? 1 : 0;
+  let numberFooters = state.detail.charactersList.length ? 1 : 0;
 
-  numberFooters = state.detail.planetsList ? numberFooters + 1 : numberFooters;
-  numberFooters = state.detail.starshipsList ? numberFooters + 1 : numberFooters;
+  numberFooters = state.detail.planetsList.length ? numberFooters + 1 : numberFooters;
+  numberFooters = state.detail.starshipsList.length ? numberFooters + 1 : numberFooters;
 
   return 3 - numberFooters;
 }

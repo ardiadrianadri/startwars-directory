@@ -68,7 +68,7 @@ export function useNavigateToDetail() {
 export function useDetailFooterList(type, size) {
   const fullDataList = useSelector(detailGridDataSelector(type));
   const [offset, updateOffset] = useState(0);
-  const [ dataList, updateDataList ] = useState([]);
+  const [ dataList, updateDataList ] = useState(fullDataList.slice(0, size));
 
   const isTherePrevPage = () => offset - size >= 0;
   const isThereNextPage = () => offset + size < fullDataList.length;

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 import StarwarsDetail from "../../components/starwars-detail/starwars-detail";
 import StarwarsRenderData from '../../components/starwars-render-data/starwars-render-data';
-import GridDetailFooter from '../../search-module/grid-detail-footer/grid-detail-footer';
+import GridDetailFooter from '../grid-detail-footer/grid-detail-footer';
 
 import { requestDetail } from '../detail-thunks';
 import {
