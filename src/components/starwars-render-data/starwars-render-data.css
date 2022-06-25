@@ -1,5 +1,8 @@
 .render-data_container {
   width: 100%;
+}
+
+.render-data_row {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }

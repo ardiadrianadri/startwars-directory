@@ -4,10 +4,14 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-// import StarwarsDetail from "../../components/starwars-detail/starwars-detail";
+import StarwarsDetail from "../../components/starwars-detail/starwars-detail";
+import StarwarsRenderData from '../../components/starwars-render-data/starwars-render-data';
 
 import { requestDetail } from '../detail-thunks';
-import { detailErrorSelector } from '../detail-selectors';
+import {
+  detailErrorSelector,
+  detailDataSelector
+} from '../detail-selectors';
 
 function GenericDetailContainer() {
 
@@ -15,17 +19,38 @@ function GenericDetailContainer() {
   const dispatch = useDispatch();
   const errorDetail = useSelector(detailErrorSelector);
   const navigate = useNavigate();
+  const {name, picture, favorite, detailData} = useSelector(detailDataSelector);
 
-  dispatch(requestDetail(id, type));
+  console.log('NNN detailData: ', favorite);
 
-  if (errorDetail) { 
-    navigate('/');
+  const renderDetail = () => {
+    let result = (<></>);
+
+    if (detailData) {
+      result = (
+        <StarwarsDetail
+          id={id}
+          type={type}
+          mainTitle={name}
+          mainImage={picture}
+          mainData={<StarwarsRenderData data={Object.entries(detailData)} />}
+          favorite={favorite}
+        />
+      );
+    }
+
+    return result;
   }
 
+  useEffect(() => {
+    if (errorDetail) { 
+      navigate('/');
+    } else {
+      dispatch(requestDetail(id, type));
+    }
+  }, [errorDetail]);
 
-  return (
-    <h1>This will be the detail container</h1>
-  );
+  return renderDetail();
 }
 
 export default GenericDetailContainer;
