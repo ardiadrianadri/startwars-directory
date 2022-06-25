@@ -4,7 +4,7 @@ import ExampleResultRepository from './example-result-repository';
 
 export default {
   title: 'Repositories/Results',
-  component: ExampleResultRepository
+  component: ExampleResultRepository,
 }
 
 const Template = (args) => <ExampleResultRepository {...args} />;
@@ -22,4 +22,5 @@ Default.args = {
   favoriteId: '',
   pageUrl: '',
   pageType: '',
+  urlList: []
 };
