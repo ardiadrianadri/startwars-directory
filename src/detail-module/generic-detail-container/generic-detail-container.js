@@ -6,11 +6,14 @@ import { useNavigate } from 'react-router-dom';
 
 import StarwarsDetail from "../../components/starwars-detail/starwars-detail";
 import StarwarsRenderData from '../../components/starwars-render-data/starwars-render-data';
+import GridDetailFooter from '../../search-module/grid-detail-footer/grid-detail-footer';
 
 import { requestDetail } from '../detail-thunks';
 import {
   detailErrorSelector,
-  detailDataSelector
+  detailDataSelector,
+  detailSizeGridFooters,
+  detailGetListFooters
 } from '../detail-selectors';
 
 function GenericDetailContainer() {
@@ -20,14 +23,14 @@ function GenericDetailContainer() {
   const errorDetail = useSelector(detailErrorSelector);
   const navigate = useNavigate();
   const {name, picture, favorite, detailData} = useSelector(detailDataSelector);
+  const listFooterSize = useSelector(detailSizeGridFooters);
+  const listFooters = useSelector(detailGetListFooters);
 
   console.log('NNN detailData: ', favorite);
 
-  const renderDetail = () => {
-    let result = (<></>);
-
-    if (detailData) {
-      result = (
+  const rederStarwarsDetail = () => {
+    if (listFooters.length === 0) {
+      return (
         <StarwarsDetail
           id={id}
           type={type}
@@ -37,6 +40,57 @@ function GenericDetailContainer() {
           favorite={favorite}
         />
       );
+    }
+
+    if (listFooters.length === 1) {
+      const footer = (
+        <GridDetailFooter size={listFooterSize} type={listFooters[0]}/>
+      );
+
+      return (
+        <StarwarsDetail
+          id={id}
+          type={type}
+          mainTitle={name}
+          mainImage={picture}
+          mainData={<StarwarsRenderData data={Object.entries(detailData)} />}
+          favorite={favorite}
+          footerLeftTitle={listFooters[0]}
+          footerLeft={footer}
+        />
+      );
+    }
+
+    if (listFooters.length === 2) {
+      const footerLeft = (
+        <GridDetailFooter size={listFooterSize} type={listFooters[0]}/>
+      );
+      const footerRight = (
+        <GridDetailFooter size={listFooterSize} type={listFooters[1]}/>
+      );
+
+      return (
+        <StarwarsDetail
+          id={id}
+          type={type}
+          mainTitle={name}
+          mainImage={picture}
+          mainData={<StarwarsRenderData data={Object.entries(detailData)} />}
+          favorite={favorite}
+          footerLeftTitle={listFooters[0]}
+          footerLeft={footerLeft}
+          footerRightTitle={listFooters[1]}
+          footerRight={footerRight}
+        />
+      );
+    }
+  }
+
+  const renderDetail = () => {
+    let result = (<></>);
+
+    if (detailData) {
+      result = rederStarwarsDetail();
     }
 
     return result;
