@@ -1,7 +1,10 @@
 import StarwarsResultsGrid from '../../components/starwars-results-grid/starwars-results-grid';
 import StarwarsPaginationBar from '../../components/starwars-pagination-bar/starwars-pagination-bar';
 
-import { useDetailFooterList } from '../../helpers/customHooks';
+import {
+  useDetailFooterList,
+  useNavigateToDetail
+} from '../../helpers/customHooks';
 
 function GridDetailFooter ({size, type}) {
   const {
@@ -12,10 +15,13 @@ function GridDetailFooter ({size, type}) {
     goNextPage
    } = useDetailFooterList(type, size);
 
+   const onElementSelected = useNavigateToDetail();
+
    return (
     <>
       <StarwarsResultsGrid
         dataList={dataList}
+        elementSelected={onElementSelected}
       />
       <StarwarsPaginationBar
         isThereNextPage={isThereNextPage()}
