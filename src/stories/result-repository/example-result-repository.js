@@ -6,7 +6,7 @@ import StarwarsLoadingScreen from '../../components/starwars-loading-screen/star
 import StarwarsButton from '../../components/starwars-button/starwars-button';
 import { BUTTON_COLORS, BUTTON_SIZES } from '../../components/starwars-button/button-constants';
 
-function ExampleResultRepository({filters, search, favoriteType, favoriteId, pageUrl, pageType}) {
+function ExampleResultRepository({filters, search, favoriteType, favoriteId, pageUrl, pageType, urlList}) {
   const [showLoading, updateShowLoading] = useState(false);
   const [showError, updateShowError] = useState(false);
   const [errorTitle, updateErrorTitle] = useState('');
@@ -48,6 +48,13 @@ function ExampleResultRepository({filters, search, favoriteType, favoriteId, pag
       .catch(errorManager);
   };
 
+  const getResultByUrlList = () => {
+    updateShowLoading(true);
+    searchResultRepository.getResultByUrlList(urlList, pageType)
+      .then(successManager)
+      .catch(errorManager);
+  }
+
   return (
     <>
       <StarwarsLoadingScreen showLoading={showLoading} />
@@ -68,6 +75,9 @@ function ExampleResultRepository({filters, search, favoriteType, favoriteId, pag
       </StarwarsButton><br />
       <StarwarsButton color={BUTTON_COLORS.PRIMARY} size={BUTTON_SIZES.MEDIUM}>
         <button type='button' onClick={goToPage}>Go to page</button>
+      </StarwarsButton><br />
+      <StarwarsButton color={BUTTON_COLORS.SECONDARY} size={BUTTON_SIZES.MEDIUM}>
+        <button type='button' onClick={getResultByUrlList}>Get result by url list</button>
       </StarwarsButton>
     </>
   );
