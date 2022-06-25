@@ -3,22 +3,30 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   loading: false,
   error: null,
+  name: '',
+  picture: '',
+  favorite: false,
   detailData: null,
   charactersList: [],
   planetsList: [],
   starshipsList: [],
+  id: null,
+  type: null,
 };
 
 export const detailSlice = createSlice({
   name: 'detail',
   initialState,
   reducers: {
-    detailRequest: state => {
+    detailRequest: (state, action) => {
+      const { id, type } = action.payload;
+      state.id = id;
+      state.type = type;
       state.loading = true;
       state.error = null;
     },
     detailRequestSuccess: (state, action) => {
-      const { elementData, related } = action.payload;
+      const {name, favorite, picture, elementData, related } = action.payload;
 
       if (related.characters) {
         state.charactersList = related.characters;
@@ -32,6 +40,9 @@ export const detailSlice = createSlice({
         state.starshipsList = related.starships
       }
 
+      state.name = name;
+      state.picture = picture;
+      state.favorite = favorite;
       state.detailData = elementData;
       state.loading = false;
     },

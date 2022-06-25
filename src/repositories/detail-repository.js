@@ -21,9 +21,9 @@ const getPictures = {
 }
 
 const dataProperties = {
-  [CHARACTERS]: ['name', 'height', 'mass', 'hair_color', 'skin_color', 'eye_color', 'birth_year', 'gender'],
-  [PLANETS]: ['name','rotation_period','orbital_period','diameter','climate','gravity','terrain','surface_water','population'],
-  [STARSHIPS]: ['name','model','manufacturer','cost_in_credits','length','max_atmosphering_speed','crew','passengers','cargo_capacity','consumables','hyperdrive_rating','MGLT','starship_class']
+  [CHARACTERS]: ['height', 'mass', 'hair_color', 'skin_color', 'eye_color', 'birth_year', 'gender'],
+  [PLANETS]: ['rotation_period','orbital_period','diameter','climate','gravity','terrain','surface_water','population'],
+  [STARSHIPS]: ['model','manufacturer','cost_in_credits','length','max_atmosphering_speed','crew','passengers','cargo_capacity','consumables','hyperdrive_rating','MGLT','starship_class']
 }
 
 const planetsProperties = {
@@ -47,7 +47,7 @@ class DetailRepository {
     return data;
   }
 
-  _successManager(type) {
+  _successManager(type, id) {
     return (data) => {
       const elementData = dataProperties[type]
         .reduce((acc, property) => ({
@@ -55,7 +55,10 @@ class DetailRepository {
           [property.replace(/_/g, ' ')]: data[property]
         }), {});
 
-      elementData.picture = getPictures[type](data.name);
+
+      const name = data.name;
+      const picture = getPictures[type](data.name);
+      const favorite = favoritesRepository.existInFavorites(id, type);
 
       const related = {
         [CHARACTERS]: (charactersProperties[type]) ? this._proccessRelatedData(data[charactersProperties[type]]) : null,
@@ -63,7 +66,7 @@ class DetailRepository {
         [STARSHIPS]: (starshipsProperties[type]) ? this._proccessRelatedData(data[starshipsProperties[type]]) :  null
       }
 
-      return { elementData, related };
+      return { name, favorite, picture, elementData, related };
     }
   }
 
@@ -102,7 +105,7 @@ class DetailRepository {
     }
 
     return request
-      .then(this._successManager(type))
+      .then(this._successManager(type, id))
       .catch(this._errorManager(type));
   }
 }

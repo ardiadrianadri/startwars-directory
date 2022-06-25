@@ -9,15 +9,19 @@ import {
 import { genericError } from '../helpers/errors-code';
 
 export function requestDetail(id, type) {
-  return (dispatch) => {
-    dispatch(detailRequest());
-    detailRepository.getDetailInfo(id, type)
-      .then((data) => {
-        dispatch(detailRequestSuccess(data));
-      })
-      .catch((err) => {
-        console.error(err);
-        dispatch(detailRequestError(genericError));
-      })
+  return (dispatch, getState) => {
+    const { id: prevId, type: prevType } = getState().detail;
+    
+    if (id !== prevId || type !== prevType) {
+      dispatch(detailRequest({id, type}));
+      detailRepository.getDetailInfo(id, type)
+        .then((data) => {
+          dispatch(detailRequestSuccess(data));
+        })
+        .catch((err) => {
+          console.error(err);
+          dispatch(detailRequestError(genericError));
+        })
+    }
   }
 }
