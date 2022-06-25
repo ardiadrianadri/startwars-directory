@@ -26,3 +26,11 @@ export function starshipsResultsSelector(state) {
     pagination: state.search.starshipsPagination
   }
 }
+
+export function filtersSelector(state) {
+  return state.search.filters;
+}
+
+export function lastSearchSelector(state) {
+  return state.search.lastSearch;
+}

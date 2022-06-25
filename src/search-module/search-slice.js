@@ -13,27 +13,19 @@ const initialState = {
   lastSearch: ''
 }
 
-function areFiltersEqual(filterA, filterB) {
-  
-  return filterA.characters === filterB.characters
-  && filterA.planets === filterB.planets
-  && filterA.starchips === filterB.starchips;
-}
-
 export const searchSlice = createSlice({
   name: 'search',
   initialState,
   reducers: {
     searchRequest: (state, action) => {
-      const { filters, lastSearch } = (action) ? action.payload : false;
+      const { filters, lastSearch, updateFavorites } = (action) ? action.payload : false;
       state.loading = true;
       state.error = null;
-
-      if (state.filters && !areFiltersEqual(filters, state.filters)) {
+  
+      if (!updateFavorites) {
         state.charactersResults = [];
         state.planetsResults = [];
         state.starshipsResults = [];
-  
       }
 
       state.filters = {...filters};
@@ -64,10 +56,18 @@ export const searchSlice = createSlice({
 
       state.error = { title, message }
       state.loading = false;
+    },
+    cleanSearch: (state) => {
+      state.charactersResults = [];
+      state.planetsResults = [];
+      state.starshipsResults = [];
+      state.charactersPagination = null;
+      state.planetsPagination = null;
+      state.starshipsPagination = null;
     }
   }
 });
 
-export const { searchRequest, searchRequestSuccess, searchRequestError } = searchSlice.actions;
+export const { searchRequest, searchRequestSuccess, searchRequestError, cleanSearch } = searchSlice.actions;
 
 export default searchSlice.reducer;
