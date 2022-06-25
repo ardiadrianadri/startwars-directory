@@ -18,8 +18,8 @@ function GridDetailFooter ({size, type}) {
         dataList={dataList}
       />
       <StarwarsPaginationBar
-        isThereNextPage={isThereNextPage}
-        isTherePrevPage={isTherePrevPage}
+        isThereNextPage={isThereNextPage()}
+        isTherePrevPage={isTherePrevPage()}
         goNext={goNextPage}
         goPrev={goPrevPage}
       />

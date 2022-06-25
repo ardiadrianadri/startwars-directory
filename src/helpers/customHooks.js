@@ -79,8 +79,9 @@ export function useDetailFooterList(type, size) {
   }
 
   const goNextPage = () => {
-    updateOffset(offset + size);
-    updateDataList(fullDataList.slice(offset, offset + size));
+    const newOffset = offset + size;
+    updateOffset(newOffset);
+    updateDataList(fullDataList.slice(newOffset , newOffset + size));
   }
 
   return {

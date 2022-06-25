@@ -10,18 +10,13 @@ const initialState = {
   charactersList: [],
   planetsList: [],
   starshipsList: [],
-  id: null,
-  type: null,
 };
 
 export const detailSlice = createSlice({
   name: 'detail',
   initialState,
   reducers: {
-    detailRequest: (state, action) => {
-      const { id, type } = action.payload;
-      state.id = id;
-      state.type = type;
+    detailRequest: (state) => {
       state.loading = true;
       state.error = null;
     },
@@ -58,8 +53,6 @@ export const detailSlice = createSlice({
       state.charactersList = [];
       state.planetsList = [];
       state.starshipsList = [];
-      state.id = null;
-      state.type = null;
     }
   }
 });
