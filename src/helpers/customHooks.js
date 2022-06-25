@@ -84,6 +84,10 @@ export function useDetailFooterList(type, size) {
     updateDataList(fullDataList.slice(newOffset , newOffset + size));
   }
 
+  useEffect(() => {
+    updateDataList(fullDataList.slice(offset, offset + size));
+  }, [fullDataList]);
+
   return {
     dataList,
     isTherePrevPage,

@@ -50,3 +50,15 @@ export function updateFavorite(id, type, favorite) {
     return getDetailInfo(dispatch, id, type);
   }
 }
+
+export function updateFavoriteFromFooter(id, type, favoriteData) {
+  return (dispatch) => {
+    if (favoriteData.favorite) {
+      detailRepository.addfavorite(favoriteData.id, favoriteData.type);
+    } else {
+      detailRepository.removefavorite(favoriteData.id, favoriteData.type);
+    }
+
+    return getDetailInfo(dispatch, id, type);
+  }
+}
