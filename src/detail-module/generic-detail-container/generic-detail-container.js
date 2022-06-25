@@ -27,8 +27,6 @@ function GenericDetailContainer() {
   const listFooterSize = useSelector(detailSizeGridFooters);
   const listFooters = useSelector(detailGetListFooters);
 
-  console.log('NNN detailData: ', favorite);
-
   const rederStarwarsDetail = () => {
     if (listFooters.length === 0) {
       return (
@@ -107,7 +105,7 @@ function GenericDetailContainer() {
     return () => {
       dispatch(cleanDetail());
     }
-  }, [errorDetail]);
+  }, [errorDetail, id, type]);
 
   return renderDetail();
 }
