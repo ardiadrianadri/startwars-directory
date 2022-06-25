@@ -8,7 +8,7 @@ import StarwarsDetail from "../../components/starwars-detail/starwars-detail";
 import StarwarsRenderData from '../../components/starwars-render-data/starwars-render-data';
 import GridDetailFooter from '../grid-detail-footer/grid-detail-footer';
 
-import { requestDetail } from '../detail-thunks';
+import { requestDetail, updateFavorite } from '../detail-thunks';
 import {
   detailErrorSelector,
   detailDataSelector,
@@ -27,6 +27,10 @@ function GenericDetailContainer() {
   const listFooterSize = useSelector(detailSizeGridFooters);
   const listFooters = useSelector(detailGetListFooters);
 
+  const onChangeFavorite = (event) => {
+    dispatch(updateFavorite(id, type, event.favorite));
+  };
+
   const rederStarwarsDetail = () => {
     if (listFooters.length === 0) {
       return (
@@ -37,6 +41,7 @@ function GenericDetailContainer() {
           mainImage={picture}
           mainData={<StarwarsRenderData data={Object.entries(detailData)} />}
           favorite={favorite}
+          changeFavorite={onChangeFavorite}
         />
       );
     }
@@ -54,6 +59,7 @@ function GenericDetailContainer() {
           mainImage={picture}
           mainData={<StarwarsRenderData data={Object.entries(detailData)} />}
           favorite={favorite}
+          changeFavorite={onChangeFavorite}
           footerLeftTitle={listFooters[0]}
           footerLeft={footer}
         />
@@ -76,6 +82,7 @@ function GenericDetailContainer() {
           mainImage={picture}
           mainData={<StarwarsRenderData data={Object.entries(detailData)} />}
           favorite={favorite}
+          changeFavorite={onChangeFavorite}
           footerLeftTitle={listFooters[0]}
           footerLeft={footerLeft}
           footerRightTitle={listFooters[1]}

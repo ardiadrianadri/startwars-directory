@@ -8,8 +8,8 @@ import {
 
 import { genericError } from '../helpers/errors-code';
 
-function runTheSearch(filters, lastSearch, dispatch) {
-  dispatch(searchRequest({ filters, lastSearch }));
+function runTheSearch(filters, lastSearch, updateFavorites, dispatch) {
+  dispatch(searchRequest({ filters, lastSearch, updateFavorites }));
   return searchResultRepository.doSearch(filters, lastSearch)
     .then(data => {
       dispatch(searchRequestSuccess(data));
@@ -22,7 +22,7 @@ function runTheSearch(filters, lastSearch, dispatch) {
 
 export function searchThunk(filters, search) {
   return (dispatch) => {
-    runTheSearch(filters, search, dispatch);
+    runTheSearch(filters, search, false, dispatch);
   }
 }
 
@@ -50,6 +50,16 @@ export function setFavorites(id, type, favorite) {
     }
 
     const { filters, lastSearch } = getState().search;
-    runTheSearch(filters, lastSearch, dispatch);
+    runTheSearch(filters, lastSearch, true, dispatch);
+  }
+}
+
+export function runLastSearch() {
+  return (dispatch, getState) => {
+  const { filters, lastSearch } = getState().search;
+
+  if (filters && lastSearch) {
+    runTheSearch(filters, lastSearch, false, dispatch);
+  }
   }
 }
