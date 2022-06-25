@@ -10,18 +10,13 @@ const initialState = {
   charactersList: [],
   planetsList: [],
   starshipsList: [],
-  id: null,
-  type: null,
 };
 
 export const detailSlice = createSlice({
   name: 'detail',
   initialState,
   reducers: {
-    detailRequest: (state, action) => {
-      const { id, type } = action.payload;
-      state.id = id;
-      state.type = type;
+    detailRequest: (state) => {
       state.loading = true;
       state.error = null;
     },
@@ -49,10 +44,19 @@ export const detailSlice = createSlice({
     detailRequestError: (state, action) => {
       state.error = action.payload;
       state.loading = false;
+    },
+    cleanDetail: (state) => {
+      state.name = '';
+      state.picture = '';
+      state.favorite = false;
+      state.detailData = null;
+      state.charactersList = [];
+      state.planetsList = [];
+      state.starshipsList = [];
     }
   }
 });
 
-export const { detailRequest, detailRequestError, detailRequestSuccess } = detailSlice.actions;
+export const { detailRequest, detailRequestError, detailRequestSuccess, cleanDetail } = detailSlice.actions;
 
 export default detailSlice.reducer;

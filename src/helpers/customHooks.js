@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { ACCORDION_STATES } from '../components/starwars-accordion/starwars-accordion-states';
 import { setFavorites, paginationThunk } from '../search-module/search-thunks';
+import { detailGridDataSelector } from '../detail-module/detail-selectors';
 
 export function useAccordionState(selector) {
   const [accordionState, updateAccordionState] = useState(ACCORDION_STATES.CLOSE);
@@ -62,5 +63,33 @@ export function useNavigateToDetail() {
   return ({id, type}) => {
     navigate(`/detail/${type}/${id}`);
   }
+}
+
+export function useDetailFooterList(type, size) {
+  const fullDataList = useSelector(detailGridDataSelector(type));
+  const [offset, updateOffset] = useState(0);
+  const [ dataList, updateDataList ] = useState(fullDataList.slice(0, size));
+
+  const isTherePrevPage = () => offset - size >= 0;
+  const isThereNextPage = () => offset + size < fullDataList.length;
+
+  const goPrevPage = () => {
+    updateOffset(offset - size);
+    updateDataList(fullDataList.slice(offset - size, offset));
+  }
+
+  const goNextPage = () => {
+    const newOffset = offset + size;
+    updateOffset(newOffset);
+    updateDataList(fullDataList.slice(newOffset , newOffset + size));
+  }
+
+  return {
+    dataList,
+    isTherePrevPage,
+    isThereNextPage,
+    goPrevPage,
+    goNextPage
+  };
 }
 
