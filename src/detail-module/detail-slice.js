@@ -49,10 +49,21 @@ export const detailSlice = createSlice({
     detailRequestError: (state, action) => {
       state.error = action.payload;
       state.loading = false;
+    },
+    cleanDetail: (state) => {
+      state.name = '';
+      state.picture = '';
+      state.favorite = false;
+      state.detailData = null;
+      state.charactersList = [];
+      state.planetsList = [];
+      state.starshipsList = [];
+      state.id = null;
+      state.type = null;
     }
   }
 });
 
-export const { detailRequest, detailRequestError, detailRequestSuccess } = detailSlice.actions;
+export const { detailRequest, detailRequestError, detailRequestSuccess, cleanDetail } = detailSlice.actions;
 
 export default detailSlice.reducer;

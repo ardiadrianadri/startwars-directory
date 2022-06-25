@@ -1,6 +1,5 @@
 .detail_container{
   width: 95%;
-  height: 783px;
   margin-left: auto;
   margin-right: auto;
   border: solid 3px #000000;
@@ -33,7 +32,7 @@
   justify-content: space-around;
   align-items: center;
   border-bottom: solid 3px #000000;
-  margin: 20px 0px;
+  padding: 20px 0px;
 }
 
 .detail_body.no_footer {

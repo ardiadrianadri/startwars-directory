@@ -15,6 +15,7 @@ import {
   detailSizeGridFooters,
   detailGetListFooters
 } from '../detail-selectors';
+import { cleanDetail } from '../detail-slice';
 
 function GenericDetailContainer() {
 
@@ -101,6 +102,10 @@ function GenericDetailContainer() {
       navigate('/');
     } else {
       dispatch(requestDetail(id, type));
+    }
+
+    return () => {
+      dispatch(cleanDetail());
     }
   }, [errorDetail]);
 
