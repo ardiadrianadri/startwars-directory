@@ -67,8 +67,8 @@ class SearchResultRepository {
       });
 
       const pagination = {
-        nextPage: data.next,
-        prevPage: data.previous,
+        nextPage: data?.next,
+        prevPage: data?.previous,
       }
 
       return {
@@ -152,6 +152,21 @@ class SearchResultRepository {
         }
 
         return data;
+      })
+      .catch(this._errorManager(type));
+  }
+
+  getResultByUrlList(urlList, type) {
+    return Promise.all(urlList.map((url) => swapiDataSource.getByUrl(url)))
+      .then((listResults) => {
+        return this._successManager(type)({
+          results: listResults
+        });
+      })
+      .then((data) => {
+        const { results } = data[type];
+
+        return results;
       })
       .catch(this._errorManager(type));
   }
